@@ -101,22 +101,12 @@ internal abstract class GenerateResClassTask : DefaultTask() {
         }
 
         if (typeString == "values" && file.name.equals("strings.xml", true)) {
-<<<<<<< HEAD
-            return getStringResources(file).mapNotNull { (typeName, strId) ->
-                val type = when(typeName) {
-                    "string", "string-array" -> ResourceType.STRING
-                    "plurals" -> ResourceType.PLURAL_STRING
-                    else -> return@mapNotNull null
-                }
-                ResourceItem(type, qualifiers, strId.asUnderscoredIdentifier(), path)
-=======
             val stringIds = getStringIds(file)
             val pluralStringIds = getPluralStringIds(file)
             return stringIds.map { strId ->
                 ResourceItem(ResourceType.STRING, qualifiers, strId.asUnderscoredIdentifier(), path)
             } + pluralStringIds.map { pluralStrId ->
                 ResourceItem(ResourceType.PLURAL_STRING, qualifiers, pluralStrId.asUnderscoredIdentifier(), path)
->>>>>>> origin/clebrain
             }
         }
 
